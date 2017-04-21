@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <script src="jquery-3.2.1.js"></script>
+</head>
+<body>
+<h1>this is a table showing table row selected by tab key</h1>
+<table class="table table-bordered">
+    <thead>
+    <th>name</th>
+    <th>age</th>
+    <th>height</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td tabindex="500" data-nu>tom</td>
+        <td tabindex="500">23</td>
+        <td tabindex="500">173cm</td>
+    </tr>
+    <tr>
+        <td tabindex="500">lucy</td>
+        <td tabindex="500">32</td>
+        <td tabindex="500">163cm</td>
+    </tr>
+    <tr>
+        <td tabindex="500">frank</td>
+        <td tabindex="500">28</td>
+        <td tabindex="500">182cm</td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    //console.log($('tbody tr:nth-child(3)'));
+    //$('tbody tr:nth-child(3)').focus();
+    document.querySelector('tbody tr:nth-child(2) td:nth-child(2)').focus();
+
+    //var focused=2;
+    window.addEventListener('keyup',function (e) {
+        //console.log(e.keyCode);
+        //console.log(typeof e.keyCode)
+
+        var $index;
+        switch (e.keyCode) {
+            case 38:
+                $index=$(document.activeElement).index();
+                $(document.activeElement).parent().prev().find('td:nth-child('+(++$index)+')').focus();
+                break;
+
+            case 40:
+                $index=$(document.activeElement).index();
+                $(document.activeElement).parent().next().find('td:nth-child('+(++$index)+')').focus();
+                break;
+            case 37:
+                $index=$(document.activeElement).index();
+                $(document.activeElement).prev().focus();
+                break;
+            case 39:
+                $index=$(document.activeElement).index();
+                $(document.activeElement).next().focus();
+                break;
+        }
+    })
+</script>
+</body>
+</html>
